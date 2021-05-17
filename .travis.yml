@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+after_success:
+  - docker build -t armnpk/multi-frontend ./client
+  - docker build -t armnpk/multi-api ./server
+  - docker build -t armnpk/multi-nginx ./nginx
+  - docker build -t armnpk/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stin
+  - docker push armnpk/multi-frontend
+  - docker push armnpk/multi-api
+  - docker push armnpk/multi-nginx
+  - docker push armnpk/multi-worker
