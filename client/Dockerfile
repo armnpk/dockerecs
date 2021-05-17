@@ -2,7 +2,7 @@ FROM node:alpine as BUILDER
 WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
-RUN npm build
+RUN npm run build
 
 FROM nginx as PUBLISH
 EXPOSE 3000
